@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import sys
-sys.path.append("/opt/airflow/ingestion_init")  # pour que le DAG voie le script
+sys.path.append("/opt/airflow") #/ingestion_init") 
 
 from ingestion_init.records import populate_records
 from ingestion_init.stream import populate_streams

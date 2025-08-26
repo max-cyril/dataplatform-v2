@@ -4,7 +4,7 @@ import random
 import uuid
 import json
 from datetime import datetime
-from logger import log_to_es
+from ingestion_init.logger import log_to_es
 
 UUID_CACHE_PATH = "ingestion_init/uuid_cache.json"
 
