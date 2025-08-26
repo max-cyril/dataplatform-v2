@@ -5,7 +5,7 @@ from faker import Faker
 import uuid
 import json
 import os
-from logger import log_to_es
+from ingestion_init.logger import log_to_es
 
 fake = Faker()
 
