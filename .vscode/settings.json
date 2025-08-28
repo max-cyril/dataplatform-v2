@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "database": "dwh",
+            "username": "postgres",
+            "name": "Postgres DWH",
+            "password": "postgres"
+        }
+    ]
+}

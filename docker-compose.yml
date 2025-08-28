@@ -38,7 +38,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./init/init-dwh.sql:/docker-entrypoint-initdb.d/init.sql    - ./init/init-dwh.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres_datawarehouse/init.sql:/docker-entrypoint-initdb.d/init.sql    - ./postgres_datawarehouse/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - elasticnet
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
@@ -134,6 +136,7 @@ services:
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./ingestion_init:/opt/airflow/ingestion_init
+      - ./ingestion_microservice:/opt/airflow/ingestion_microservice
       - ./es:/opt/airflow/es 
       - ./requirements.txt:/requirements.txt  
       - /var/run/docker.sock:/var/run/docker.sock
@@ -153,6 +156,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=2n9QfW5cEoZ3V8Y7c5j4lQ8sKp6Tz0R2v8s5QzK3l1o=
     volumes:
       - ./ingestion_init:/opt/airflow/ingestion_init
+      - ./ingestion_microservice:/opt/airflow/ingestion_microservice
       - ./es:/opt/airflow/es 
       - ./requirements.txt:/requirements.txt  
       - ./airflow/dags:/opt/airflow/dags
@@ -177,6 +181,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=2n9QfW5cEoZ3V8Y7c5j4lQ8sKp6Tz0R2v8s5QzK3l1o=
     volumes:
       - ./ingestion_init:/opt/airflow/ingestion_init
+      - ./ingestion_microservice:/opt/airflow/ingestion_microservice
       - ./es:/opt/airflow/es 
       - ./requirements.txt:/requirements.txt  
       - ./airflow/dags:/opt/airflow/dags
@@ -200,6 +205,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=2n9QfW5cEoZ3V8Y7c5j4lQ8sKp6Tz0R2v8s5QzK3l1o=
     volumes:
       - ./ingestion_init:/opt/airflow/ingestion_init
+      - ./ingestion_microservice:/opt/airflow/ingestion_microservice
       - ./es:/opt/airflow/es 
       - ./requirements.txt:/requirements.txt  
       - ./airflow/dags:/opt/airflow/dags

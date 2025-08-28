@@ -2,21 +2,22 @@
 import mysql.connector
 import psycopg2
 import uuid
-from log_decorator import log_to_es
+from ingestion_init.logger import log_to_es
 
-@log_to_es(index="records")
-def ingest():
+@log_to_es(index="etl_records")
+def records_ingestion():
     # Connexions
     mysql_conn = mysql.connector.connect(
         host="mysql_records",
+        port=3306,
         user="root",
         password="root",
         database="records"
     )
     pg_conn = psycopg2.connect(
-        host="postgres",
+        host="postgres_dwh",
         user="postgres",
-        password="password",
+        password="postgres",
         dbname="dwh"
     )
     mysql_cur = mysql_conn.cursor(dictionary=True)
@@ -54,4 +55,4 @@ def ingest():
     pg_conn.close()
 
 if __name__ == "__main__":
-    ingest()
+    records_ingestion()
