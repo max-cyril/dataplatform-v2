@@ -38,7 +38,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres_datawarehouse/init.sql:/docker-entrypoint-initdb.d/init.sql    - ./postgres_datawarehouse/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres_datawarehouse/init.sql:/docker-entrypoint-initdb.d/init.sql    
     networks:
       - elasticnet
 

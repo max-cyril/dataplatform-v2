@@ -28,6 +28,6 @@ CREATE TABLE IF NOT EXISTS RAW.product (
     created_at TIMESTAMP
 );
 
-ALTER DATABASE postgres SET search_path = public, RAW, BRONZE, SILVER, GOLD;
+ALTER DATABASE dwh SET search_path = public, RAW, BRONZE, SILVER, GOLD;
 
 
