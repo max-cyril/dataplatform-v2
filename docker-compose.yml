@@ -62,6 +62,7 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:8.13.4
     container_name: kibana
+    restart: always
     depends_on:
       - elasticsearch
     environment:

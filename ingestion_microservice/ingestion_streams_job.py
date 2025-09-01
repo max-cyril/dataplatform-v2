@@ -2,16 +2,16 @@
 import mysql.connector
 import psycopg2
 import uuid
-from log_decorator import log_to_es
+from ingestion_init.logger import log_to_es
 
-@log_to_es(index="ingest-source2")
-def ingest():
+@log_to_es(index="ingest_raw")
+def streams_ingestion():
     mysql_conn = mysql.connector.connect(
-        host="mysql_records",
+        host="mysql_streams",
         port=3306,
         user="root",
         password="root",
-        database="records"
+        database="streams"
     )
     pg_conn = psycopg2.connect(
         host="postgres_dwh",
@@ -42,4 +42,4 @@ def ingest():
     pg_conn.close()
 
 if __name__ == "__main__":
-    ingest()
+    streams_ingestion()

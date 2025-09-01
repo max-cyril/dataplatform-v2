@@ -4,7 +4,7 @@ import psycopg2
 import uuid
 from ingestion_init.logger import log_to_es
 
-@log_to_es(index="etl_records")
+@log_to_es(index="ingest_raw")
 def records_ingestion():
     # Connexions
     mysql_conn = mysql.connector.connect(
@@ -45,10 +45,10 @@ def records_ingestion():
     mysql_cur.execute("SELECT * FROM product")
     for row in mysql_cur.fetchall():
         pg_cur.execute("""
-            INSERT INTO raw.product (id, name, price, fournisseur_name, created_at)
+            INSERT INTO raw.product (id, name, price, supplier_name, created_at)
             VALUES (%s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING
-        """, (uuid.UUID(bytes=row["id"]), row["name"], row["price"], row["fournisseur_name"], row["created_at"]))
+        """, (uuid.UUID(bytes=row["id"]), row["name"], row["price"], row["supplier_name"], row["created_at"]))
 
     pg_conn.commit()
     mysql_conn.close()

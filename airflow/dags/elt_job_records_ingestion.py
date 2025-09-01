@@ -4,8 +4,7 @@ from datetime import datetime, timedelta
 import sys
 sys.path.append("/opt/airflow") #/ingestion_init") 
 
-from ingestion_init.records import populate_records
-from ingestion_init.stream import populate_streams
+from ingestion_microservice.ingestion_records_job import  records_ingestion 
 
 default_args = {
     'owner': 'airflow',
@@ -15,16 +14,15 @@ default_args = {
 
 
 
-def populate_both_mysql():
-    populate_records(items=100)
-    populate_streams(nb_orders=1000)
+def main():
+    records_ingestion()
 
 
 
 with DAG(
-    dag_id='populate_mysql_dag',
+    dag_id='records_ingestion_job',
     default_args=default_args,
-    description='Popule les bases MySQL records et streams',
+    description='Ingest records table from mysql to prostgre datawarehouse',
     schedule_interval='*/5 * * * *',  # toutes les 5 minutes
     start_date=datetime(2025, 8, 3),
     catchup=False,
@@ -32,6 +30,6 @@ with DAG(
 ) as dag:
 
     populate_task = PythonOperator(
-        task_id='populate_mysql',
-        python_callable=populate_both_mysql,
+        task_id='ingestion_records_job',
+        python_callable=main,
     )
