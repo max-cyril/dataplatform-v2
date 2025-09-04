@@ -71,11 +71,11 @@ def populate_records(items=100):
         uuid_obj, uuid_bin = generate_uuid_binary()
         name = fake.word().capitalize()
         price = round(random.uniform(5, 200), 2)
-        fournisseur_name = random.choice(suppliers_names)
+        supplier_name = random.choice(suppliers_names)
         cursor.execute("""
-            INSERT INTO product (id, name, price, fournisseur_name)
+            INSERT INTO product (id, name, price, supplier_name)
             VALUES (%s, %s, %s, %s)
-        """, (uuid_bin, name, price, fournisseur_name))
+        """, (uuid_bin, name, price, supplier_name))
         uuid_cache["product"].append({
             "id": str(uuid_obj),
             "name": name,

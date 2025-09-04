@@ -21,6 +21,6 @@ CREATE TABLE product (
     id BINARY(16) PRIMARY KEY,
     name VARCHAR(100),
     price DECIMAL(10,2),
-    fournisseur_name VARCHAR(100),
+    supplier_name VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -2,21 +2,22 @@
 import mysql.connector
 import psycopg2
 import uuid
-from log_decorator import log_to_es
+from ingestion_init.logger import log_to_es
 
-@log_to_es(index="records")
-def ingest():
+@log_to_es(index="ingest_raw")
+def records_ingestion():
     # Connexions
     mysql_conn = mysql.connector.connect(
         host="mysql_records",
+        port=3306,
         user="root",
         password="root",
         database="records"
     )
     pg_conn = psycopg2.connect(
-        host="postgres",
+        host="postgres_dwh",
         user="postgres",
-        password="password",
+        password="postgres",
         dbname="dwh"
     )
     mysql_cur = mysql_conn.cursor(dictionary=True)
@@ -44,14 +45,14 @@ def ingest():
     mysql_cur.execute("SELECT * FROM product")
     for row in mysql_cur.fetchall():
         pg_cur.execute("""
-            INSERT INTO raw.product (id, name, price, fournisseur_name, created_at)
+            INSERT INTO raw.product (id, name, price, supplier_name, created_at)
             VALUES (%s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING
-        """, (uuid.UUID(bytes=row["id"]), row["name"], row["price"], row["fournisseur_name"], row["created_at"]))
+        """, (uuid.UUID(bytes=row["id"]), row["name"], row["price"], row["supplier_name"], row["created_at"]))
 
     pg_conn.commit()
     mysql_conn.close()
     pg_conn.close()
 
 if __name__ == "__main__":
-    ingest()
+    records_ingestion()

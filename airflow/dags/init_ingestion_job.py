@@ -22,7 +22,7 @@ def populate_both_mysql():
 
 
 with DAG(
-    dag_id='populate_mysql_dag',
+    dag_id='init_populate_mysql_job',
     default_args=default_args,
     description='Popule les bases MySQL records et streams',
     schedule_interval='*/5 * * * *',  # toutes les 5 minutes
