@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: brz_raw__clients
+    description: "Bronze model for clients, cleaned and standardized from raw.clients"
+    columns:
+      - name: client_id
+        description: "Unique identifier for each client"
+        tests:
+          - unique
+          - not_null
+
+      - name: client_name
+        description: "Standardized client full name (capitalized)"
+
+      - name: client_email
+        description: "Normalized email address of the client"
+        tests:
+          - not_null
+
+      - name: country
+        description: "Country of the client"
+
+      - name: created_at
+        description: "Timestamp when the client record was created"
