@@ -3,7 +3,7 @@ dbt_:
   outputs:
     dev:
       dbname: dwh
-      host: localhost
+      host: "{{ env_var('POSTGRE_HOST','localhost') }}" 
       pass: postgres
       port: 5432
       schema: bronze
