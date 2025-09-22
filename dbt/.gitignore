@@ -1,0 +1,39 @@
+
+target/
+dbt_packages/
+logs/
+dbt_internal_packages/
+
+# Logs and temp files
+logs/
+target/
+dbt_modules/
+
+airflow/logs/
+
+# Python virtual environment
+venv/
+.env
+*__pycache__/
+
+data_env/
+
+# IDE files
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Mac / Windows specific
+*.DS_Store
+*.Thumbs.db
+
+# Ignore dbt artifacts
+dbt_packages/

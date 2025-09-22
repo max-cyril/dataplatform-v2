@@ -236,6 +236,21 @@ services:
     networks:
       - elasticnet
 
+
+  dbt:
+    build:
+      context: .
+      dockerfile: dbt/Dockerfile
+    networks:
+    - elasticnet
+    tty: true
+    stdin_open: true
+    depends_on:
+    - postgres_dwh
+    
+
+
+
   # metabase:
   #   image: metabase/metabase:latest
   #   container_name: metabase
