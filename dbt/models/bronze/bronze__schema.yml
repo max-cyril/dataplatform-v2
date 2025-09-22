@@ -23,3 +23,23 @@ models:
 
       - name: created_at
         description: "Timestamp when the client record was created"
+
+      
+  - name: brz_raw__product
+    description: "Cleaned product dataset with standardized names, emails and timestamps"
+    columns:
+      - name: product_id
+        description: "Unique identifier of the product"
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Standardized product name (capitalized)"
+        tests:
+          - not_null
+      - name: supplier_name
+        description: "Standardized supplier name (capitalized)"
+      - name: created_at
+        description: "Timestamp when the product was created"
+        tests:
+          - not_null

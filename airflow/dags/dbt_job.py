@@ -12,7 +12,7 @@ with DAG(
     run_dbt = DockerOperator(
         task_id="run_dbt",
         image="dbt-dataplatform:1.0.0",
-        network_mode="elasticnet",
+        network_mode="dataplatform_elasticnet",
         api_version='auto',
         auto_remove=True,
         command="dbt build",

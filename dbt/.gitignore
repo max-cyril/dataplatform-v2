@@ -9,6 +9,8 @@ logs/
 target/
 dbt_modules/
 
+airflow/logs/
+
 # Python virtual environment
 venv/
 .env
